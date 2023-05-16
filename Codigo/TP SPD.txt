@@ -1,0 +1,179 @@
+// C++ code
+//
+#define B 8
+#define A 7
+#define F 6
+#define G 5
+#define C A1
+#define D A2
+#define E A3
+#define LED_ROJO_CONSTI 13
+#define LED_AMARILLO_SANJUAN 12
+#define LED_AMARILLO_INDEPENDENCIA 11
+#define LED_AMARILLO_MORENO 10
+#define piezoPin A0
+
+int switchPin = 9; // el pin digital utilizado para el interruptor
+int switchState = 0; // variable para almacenar el estado del interruptor
+
+unsigned long contador = 0;
+ 
+void setup()
+{
+  pinMode(B, OUTPUT);
+  pinMode(A, OUTPUT);
+  pinMode(F, OUTPUT);
+  pinMode(G, OUTPUT);	
+  pinMode(C, OUTPUT);
+  pinMode(D, OUTPUT);
+  pinMode(E, OUTPUT);
+  
+  pinMode(LED_ROJO_CONSTI, OUTPUT);
+  pinMode(LED_AMARILLO_SANJUAN, OUTPUT);
+  pinMode(LED_AMARILLO_INDEPENDENCIA, OUTPUT);
+  pinMode(LED_AMARILLO_MORENO, OUTPUT);
+  
+  pinMode(piezoPin, OUTPUT);
+  
+  pinMode(switchPin, INPUT); // establece el pin del interruptor como entrada
+     
+  Serial.begin(9600);
+}
+int guardar_estado = 0;
+void loop()
+{
+   switchState = digitalRead(switchPin); // lee el estado del interruptor
+
+  if (guardar_estado == 1){
+    contador =0;}
+  
+  if (switchState == HIGH) { 
+    guardar_estado = 0;
+    
+   if (contador == 0){
+     prender_led(contador);
+     imprimir_numero(3);
+     sonar_buzer();
+     delay(1000);
+     contador ++;
+    	}
+    else if (contador == 1) {
+     prender_led(contador);
+     imprimir_numero(2);
+     sonar_buzer();
+     delay(1000);
+     contador ++;
+    }
+   else if (contador == 2) {
+    prender_led(contador);
+    imprimir_numero(1);
+  	sonar_buzer();
+    delay(1000);
+    contador ++;
+    }
+    else if (contador == 3) {
+     prender_led(contador);
+     imprimir_numero(0);
+     sonar_buzer();
+     delay(1000);
+     contador = 0;
+    }
+    }
+   
+   else if (switchState == LOW) { // si el interruptor está apagado 
+	
+      digitalWrite(LED_ROJO_CONSTI, LOW);
+      digitalWrite(LED_AMARILLO_SANJUAN, LOW);
+      digitalWrite(LED_AMARILLO_INDEPENDENCIA, LOW);
+      digitalWrite(LED_AMARILLO_MORENO, LOW);
+    
+      digitalWrite(A, LOW);
+      digitalWrite(B, LOW);
+      digitalWrite(C, LOW);
+      digitalWrite(D, LOW);
+      digitalWrite(E, LOW);
+      digitalWrite(F, LOW);
+      digitalWrite(G, LOW);
+    
+      contador == 0;
+      guardar_estado = 1;
+  }
+  
+}
+
+
+void prender_led(int estacion)
+{
+  if (estacion == 0){
+    
+    digitalWrite(LED_ROJO_CONSTI, HIGH);
+    digitalWrite(LED_AMARILLO_MORENO, LOW);
+   
+  }else if (estacion == 1){
+     digitalWrite(LED_ROJO_CONSTI, LOW);
+     digitalWrite(LED_AMARILLO_SANJUAN, HIGH);
+    
+  }else if (estacion == 2){
+     digitalWrite(LED_AMARILLO_SANJUAN, LOW);
+     digitalWrite(LED_AMARILLO_INDEPENDENCIA, HIGH);
+    
+   }else if (estacion == 3){
+     digitalWrite(LED_AMARILLO_INDEPENDENCIA, LOW);
+     digitalWrite(LED_AMARILLO_MORENO, HIGH);
+  }
+}
+
+
+void sonar_buzer()
+{
+   	tone(piezoPin, 1000, 200);
+    delay(100);
+    noTone(piezoPin);
+}
+void imprimir_numero(int numero_impreso)
+{
+  if (numero_impreso == 1)
+  {
+  digitalWrite(A, LOW);
+  digitalWrite(B, HIGH);
+  digitalWrite(C, HIGH);
+  digitalWrite(D, LOW);
+  digitalWrite(E, LOW);
+  digitalWrite(F, LOW);
+  digitalWrite(G, LOW);
+
+  }
+ else if (numero_impreso == 2)
+{
+  digitalWrite(C, LOW);
+  digitalWrite(A, HIGH);
+  digitalWrite(B, HIGH);
+  digitalWrite(G, HIGH);
+  digitalWrite(E, HIGH);
+  digitalWrite(D, HIGH);
+  digitalWrite(F, LOW);
+
+}
+else if (numero_impreso == 3)
+{
+  digitalWrite(A, HIGH);
+  digitalWrite(B, HIGH);
+  digitalWrite(C, HIGH);
+  digitalWrite(D, HIGH);
+  digitalWrite(E, LOW);
+  digitalWrite(F, LOW); 
+  digitalWrite(G, HIGH);
+
+}
+
+else if (numero_impreso == 0)
+{
+  digitalWrite(A, HIGH);
+  digitalWrite(B, HIGH);
+  digitalWrite(C, HIGH);
+  digitalWrite(D, HIGH);
+  digitalWrite(E, HIGH);
+  digitalWrite(F, HIGH);
+  digitalWrite(G, LOW);
+}
+}

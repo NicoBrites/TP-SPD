@@ -8,15 +8,13 @@
 
 ## Proyecto : Estacion de Subtes
 
-![png](https://csg.tinkercad.com/things/jS1DVyVxO4A/t725.png?rev=1684207327945000000&s=&v=1&type=circuits)
+![TP-SPD.png](https://github.com/NicoBrites/TP-SPD/blob/main/img/IMAGEN%20TINKER%20GITHUB.png?raw=true)
 
 ## Descripcion
----------------
 Es un programa simple que simula un subte pasando por las diferentes estaciones ( Constitucion, Independencia, San Juan y Moreno) 
 Donde en cada estacion se prende un led y se emite un sonido cada ves que el "subte" llega a una estacion.
 
 ## Funciones principales
----------------
 La funcion prender_led() se encarga de prender los leds dependiendo la estacion que se encuentre
 
 
@@ -167,7 +165,7 @@ void loop()
   }
 ```
 ## Link al proyecto
----------------
+
 [Proyecto en tinkerkad](https://www.tinkercad.com/things/jS1DVyVxO4A?sharecode=nAp98lj0n092F84sj0OGpgIMbh7YLPH5a8tqHJ1LTE8)
 
 
